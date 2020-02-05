@@ -1,0 +1,89 @@
+initialize() {
+
+	initializeRecombinationRate(1e-8);
+	//defineConstant("mig_rate",0.005);
+	//defineConstant("sel_coeff",0.0175);
+
+	initializeMutationType("m0", 0.5, "f", 0.0);//marker neutral mutation in p2 to record ancestrial genome changes
+	initializeMutationType("m1", 0.5, "f", 0.0); 
+//m1.convertToSubstitution = F;
+//m0.convertToSubstitution = F;
+
+//MUTATION RATE
+	initializeMutationRate(1e-8);
+
+//GENOMIC ELEMENT TYPES
+	initializeGenomicElementType("g1",c(m0,m1),c(1,1));
+
+//CHORMOSOME ORGANIZATION
+	initializeGenomicElement(g1,1,1000000);//genome length
+
+
+}
+
+//DEMOGRAPHY AND STRUCTURE
+1{
+	defineConstant("simID",getSeed()); 
+	sim.addSubpop("p1", 10000);
+}
+100000 {
+	sim.addSubpopSplit("p2", 10000, p1);//p2 split from p1
+}
+100001 late() {
+	p1.setSubpopulationSize(10000);
+	p2.setSubpopulationSize(10000);
+	p1.setMigrationRates(c(p2), c(mig_rate));
+	p2.setMigrationRates(c(p1), c(mig_rate));
+	//select the mutation with 0.01<f<0.99
+	m1muts = sim.mutationsOfType(m1);
+	muts = m1muts[sim.mutationFrequencies(p2,m1muts) > 0.005];
+	muts = muts[sim.mutationFrequencies(p2,muts) < 0.995];
+	mut = sample(muts,1);
+	//if the mutation exist, change its s value to 0.1, stop further accumulating of other m2 mutations, remove other m2 mutations
+	if (size(mut)){
+		mut.setSelectionCoeff(sel_coeff); //VARY SELECTION COEFFS
+	}
+		//m1.convertToSubstitution = F;
+	//	delete = m1muts[m1muts.selectionCoeff == 0.00];
+	//	sim.subpopulations.genomes.removeMutations(delete);
+	//	print(sim.mutationFrequencies(p2,sim.mutationsOfType(m1)));
+	//	print(sim.mutationsOfType(m1).selectionCoeff);
+	//	sim.outputFull("/Users/ajstern/projects/ldsc_selection/slim_10001_"+simID+".txt");
+	//}
+//if the mutation does not exist, rerun from 100 generation
+	//else{
+	//	cat(simID+": No sufficient freq contender");
+	//			sim.readFromPopulationFile("/Users/ajstern/Downloads/MI_soft_100_"+simID+".txt");
+	//}
+}
+fitness(m1,p1) { return 1.0; } //making sure that m2 mutations are neutral in p1
+
+100002:100199 late() { //change to 100002 and 100099
+//if at anytime mut was lost in p2, rerun from 4401 generation
+	m1muts = sim.mutationsOfType(m1);
+	freq = sim.mutationFrequencies(p2,m1muts[m1muts.selectionCoeff != 0.0]);
+	catn(freq);
+}
+100200 late() { //change to 100200
+//see if the mutation was fixed
+	//m1muts = sim.mutationsOfType(m1);
+	//freq = 1/0.005 * m1muts.selectionCoeff * sim.mutationFrequencies(p2,m1muts);
+	//print(freq);
+	//sim.outputFull("/Users/ajstern/projects/ldsc_selection/slim_11000_"+simID+".txt");
+	//if (freq == 1.0) {
+	//	cat(simID+": Fixed\n");
+	//	sim.outputFull("/Users/ajstern/projects/ldsc_selection/slim_11000_"+simID+".txt");
+	//}
+	//else{
+	//	cat(simID+": Not fixed\n");
+	//	sim.readFromPopulationFile("/Users/ajstern/projects/ldsc_selection/slim_10001_"+simID+".txt");
+	//	setSeed(getSeed()+1);
+	target = sample(c(p1.individuals,p2.individuals), 20000); //change 2000 to 20000
+	target = c(p1.individuals,p2.individuals);
+	target.genomes.outputVCF(filePath="/global/scratch/crauchman/msprime_data/sel_" + sel_coeff + ".i_"+ sim_count + ".vcf");
+	//m1muts = sim.mutationsOfType(m1);
+	//freq = sim.mutationFrequencies(p2,m1muts[m1muts.selectionCoeff != 0.0]);
+	//catn(freq);
+	sim.simulationFinished();
+}
+//in savio, add sim_count to be a variable
