@@ -4,34 +4,6 @@ _________________________________________________________________
 SIMULATION FILES:
 _________________________________________________________________
 
-General Simulation Pipeline files: 
-
-add_random_accession.py:
-adds rs values to the vcf file (slim outputs a “.” )
-
-input:	vcf
-output: vcf
-
-allele_freq.py: 
-calculates the frequency of each allele
-
-input:	vcf file
-output: a file with each SNP and its corresponding frequency (need to > to file.freqs)
-
-pheno_sim.py: 
-simulates phenotype values for a quantitative trait under a normal distribution. The two populations will have a specified difference in means of the trait. 
-
-input:	3 arguments —> number of diploid individuals in a population 1, number of diploid individuals in population 2, difference in means
-output: each individual and its corresponding quantitative phenotype value
-
-reformat_plink_assoc_REAL_FINAL.py:
-reformats the plink file to a more readable format (used for plotting data, but not really necessary for calculating heritability)
-
-input: plink assoc.linear file
-output: assoc file with ‘.ldsc’ at the end
-
-_________________________________________________________________
-
 Neutral Simulations (simulations in msprime):
 
 mig_div_msprime_sims.py:
@@ -61,29 +33,37 @@ whole pipeline for positive directional selection simulations
 
 input: 4 arguments: number of iterations, migration rate, selection coefficient, number of diploid individuals in a single population.
 output: 1 for each iteration  vcf, plink bfile, plink association file, plink association file reformatted, frequency file, ldscore file, simulated phenotype values with a difference in means of 0.2, 0.5, and 1, covariate (eigenvec) file, eigenval file
+_________________________________________________________________
+
+General Simulation Pipeline files: 
+
+add_random_accession.py:
+adds rs values to the vcf file (slim outputs a “.” )
+
+input:	vcf
+output: vcf (with .rs at end of filename)
+
+allele_freq.py: 
+calculates the frequency of each allele
+
+input:	vcf file
+output: a file with each SNP and its corresponding frequency (need to > to file.freqs)
+
+pheno_sim.py: 
+simulates phenotype values for a quantitative trait under a normal distribution. The two populations will have a specified difference in means of the trait. 
+
+input:	3 arguments —> number of diploid individuals in a population 1, number of diploid individuals in population 2, difference in means
+output: each individual and its corresponding quantitative phenotype value
+
+reformat_plink_assoc_REAL_FINAL.py:
+reformats the plink file to a more readable format (used for plotting data, but not really necessary for calculating heritability)
+
+input: plink assoc.linear file
+output: assoc file with ‘.ldsc’ at the end
 
 _________________________________________________________________
 
 HERITABILITY FILES:
-_________________________________________________________________
-
-General Heritability Pipeline files: 
-
-reformat_plink_assoc_MUNGE.py: 
-
-input:	assoc.linear.csv.filt (file created after make_assoc_csv and filter_by_freqs)
-output: assoc.linear.csv.filt.sumstats 
-
-add_m_vals.py
-adds up the values from both the l2.M_5_50 and l2.M files
-
-input:	2 arguments (the same) —> l2.M_5_50, l2.M_5_50 OR l2.M, l2.M
-output: a new l2.M_5_50 or l2.M file with the added integer (*_appended.l2.M_5_50 or *_appended.l2.M)
-
-make_assoc_csv.py:
-	
-input: plink assoc linear file
-output: assoc linear csv (changes deliminator for future analyses)
 _________________________________________________________________
 
 Neutral Heritability: 
@@ -129,4 +109,25 @@ sel_${SEL_COEFF}_dm_${DIFF_MEANS}_toappend.i_1.assoc.linear.csv.filt.sumstats: t
 sel_${SEL_COEFF}_toappend.i_1.l2.ldscore: the ldscores you will add into one giant file
 
 _________________________________________________________________
+
+General Heritability Pipeline files: 
+
+reformat_plink_assoc_MUNGE.py: 
+
+input:	assoc.linear.csv.filt (file created after make_assoc_csv and filter_by_freqs)
+output: assoc.linear.csv.filt.sumstats 
+
+add_m_vals.py
+adds up the values from both the l2.M_5_50 and l2.M files
+
+input:	2 arguments (the same) —> l2.M_5_50, l2.M_5_50 OR l2.M, l2.M
+output: a new l2.M_5_50 or l2.M file with the added integer (*_appended.l2.M_5_50 or *_appended.l2.M)
+
+make_assoc_csv.py:
+	
+input: plink assoc linear file
+output: assoc linear csv (changes deliminator for future analyses)
+
+_________________________________________________________________
+
 
