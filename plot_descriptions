@@ -1,15 +1,50 @@
 PLOT DESCRIPTIONS
+_______________________________________________________________
+Neutral 
 
-*************************
+mig_ld_fst_correlation.eps:
+I calculated the correlation coefficient between ld and fst for each of the 100 simulations for every migration rate while holding divergence time constant.  
+
+div_ld_fst_correlation.eps:
+I calculated the correlation coefficient between ld and fst for each of the 100 simulations for every divergence time while holding migration rate constant.  
+
+mig_h2.eps:
+for varying values of migration rate, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc)
+
+mig_int.eps:
+for varying values of migration rate, I plotted the intercept and the 95% CI as the error bar (calculated from the standard error given by ldsc)
+
+div_h2.eps:
+for varying values of divergence time, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc)
+
+div_int.eps:
+for varying values of divergence time, I plotted the intercept and the 95% CI as the error bar (calculated from the standard error given by ldsc)
+
+_______________________________________________________________
+Selection
+
+pdsel_h2.eps:
+for varying values of selection coefficient, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc)
 
 pdsel_h2_curve.eps:
+for varying values of selection coefficient, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc) and then fit a curve to these values in order to later calculate the relative bias
 
 pdsel_ld_fst_correlation.eps:
+I calculated the correlation coefficient between ld and fst for each of the 100 simulations for every selection coefficient.  
 
 pdsel_int.eps:
+for varying values of selection coefficient, I plotted the intercept and the 95% CI as the error bar (calculated from the standard error given by ldsc)
 
 relative_bias.eps:
+By using the curve fit on the pdsel_h2_curve.eps plot, I calculated relative bias at the SNP level
 
-h2fromsnp.eps:
+h2fromsnp.eps: 
+calculated the heritability of the trait that only came from the specified SNP 
 
-relative_bias_and_h2SNP.pdf
+relative_bias_and_h2SNP.pdf:
+the last 2 plots (relative_bias.eps and h2fromsnp.eps) overlayed
+
+_______________________________________________________________
+
+
+
