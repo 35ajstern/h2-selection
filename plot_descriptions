@@ -3,37 +3,37 @@ _______________________________________________________________
 Neutral 
 
 mig_ld_fst_correlation.eps:
-I calculated the correlation coefficient between ld and fst for each of the 100 simulations for every migration rate while holding divergence time constant.  
+I calculated the correlation coefficient between ld and fst for each of the 100 simulations for every migration rate while holding divergence time constant.  Then, plotted a boxplot of those 100 values where the x-axis is each migration rate
 
 div_ld_fst_correlation.eps:
-I calculated the correlation coefficient between ld and fst for each of the 100 simulations for every divergence time while holding migration rate constant.  
+I calculated the correlation coefficient between ld and fst for each of the 100 simulations for every divergence time while holding migration rate constant. Then, plotted a boxplot of those 100 values where the x-axis is each divergence time
 
 mig_h2.eps:
-for varying values of migration rate, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc)
+for varying values of migration rate, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc in .h2 file)
 
 mig_int.eps:
-for varying values of migration rate, I plotted the intercept and the 95% CI as the error bar (calculated from the standard error given by ldsc)
+for varying values of migration rate, I plotted the intercept and the 95% CI as the error bar (calculated from the standard error given by ldsc in .h2 file)
 
 div_h2.eps:
-for varying values of divergence time, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc)
+for varying values of divergence time, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc in .h2 file)
 
 div_int.eps:
-for varying values of divergence time, I plotted the intercept and the 95% CI as the error bar (calculated from the standard error given by ldsc)
+for varying values of divergence time, I plotted the intercept and the 95% CI as the error bar (calculated from the standard error given by ldsc in .h2 file)
 
 _______________________________________________________________
 Selection
 
+pdsel_ld_fst_correlation.eps:
+I calculated the correlation coefficient between ld and fst for each of the 100 simulations for every selection coefficient.  Then, plotted a boxplot of those 100 values where the x-axis is each selection coefficient
+
 pdsel_h2.eps:
-for varying values of selection coefficient, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc)
+for varying values of selection coefficient, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc in .h2 file)
 
 pdsel_h2_curve.eps:
-for varying values of selection coefficient, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc) and then fit a curve to these values in order to later calculate the relative bias
-
-pdsel_ld_fst_correlation.eps:
-I calculated the correlation coefficient between ld and fst for each of the 100 simulations for every selection coefficient.  
+for varying values of selection coefficient, I plotted the heritability estimate and the 95% CI as the error bar (calculated from the standard error given by ldsc in .h2 file) and then fit a curve to these values in order to later calculate the relative bias
 
 pdsel_int.eps:
-for varying values of selection coefficient, I plotted the intercept and the 95% CI as the error bar (calculated from the standard error given by ldsc)
+for varying values of selection coefficient, I plotted the intercept and the 95% CI as the error bar (calculated from the standard error given by ldsc in .h2 file)
 
 relative_bias.eps:
 By using the curve fit on the pdsel_h2_curve.eps plot, I calculated relative bias at the SNP level
@@ -42,7 +42,7 @@ h2fromsnp.eps:
 calculated the heritability of the trait that only came from the specified SNP 
 
 relative_bias_and_h2SNP.pdf:
-the last 2 plots (relative_bias.eps and h2fromsnp.eps) overlayed
+the last 2 plots (relative_bias.eps and h2fromsnp.eps) overlayed (used for space purposes on poster)
 
 _______________________________________________________________
 
